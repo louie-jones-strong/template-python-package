@@ -1,0 +1,47 @@
+name: Upload Test Package to test.pypi.org
+
+env:
+  DEFAULT_PYTHON_VERSION: 3.9
+
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  Build-Package:
+    runs-on: ubuntu-latest
+    steps:
+      - name : Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python $DEFAULT_PYTHON_VERSION
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
+          cache: 'pip' # caching pip dependencies
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-dev.txt
+
+      - name: Build Package
+        run: |
+          python setup.py sdist bdist_wheel
+
+      - name: Check Package
+        run: |
+          twine check dist/*
+
+      - name: Save Package Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: dist/
+
+      - name: Upload Package to test.pypi.org
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

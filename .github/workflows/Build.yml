@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Tests
 
 env:
@@ -82,9 +79,43 @@ jobs:
       run: |
         python -m pytest
 
+  # Build-Package:
+  #   needs: Unit-Tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name : Checkout
+  #       uses: actions/checkout@v3
+
+  #     - name: Setup Python $DEFAULT_PYTHON_VERSION
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
+  #         cache: 'pip' # caching pip dependencies
+
+  #     - name: Install dependencies
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         python -m pip install -r requirements.txt
+  #         python -m pip install -r requirements-dev.txt
+
+  #     - name: Build Package
+  #       run: |
+  #         python setup.py sdist bdist_wheel
+
+  #     - name: Check Package
+  #       run: |
+  #         twine check dist/*
+
+  #     - name: Upload Package
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: dist
+  #         path: dist/
+
+
 
   Update-Documentation:
-    needs: Unit-Tests
+    needs: Build-Package
     runs-on: ubuntu-latest
     steps:
       - name : Checkout
@@ -98,6 +129,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
           python -m pip install -r requirements-dev.txt
 
