@@ -1,11 +1,11 @@
 # docs
-sphinx==6.2.1
-sphinx-rtd-theme==1.2.2
-sphinx-autodoc-typehints==1.23.0
+sphinx
+sphinx-rtd-theme
+sphinx-autodoc-typehints
 
 # dev tests
-mypy==1.2.0
-flake8==6.0.0
+mypy
+flake8
 pytest
 converage
 genbadge[all]
