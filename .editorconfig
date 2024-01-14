@@ -3,3 +3,7 @@
 # top-most EditorConfig file
 root = true
 
+# for github actions
+[.github/**.yml]
+indent_style = space
+indent_size = 2
