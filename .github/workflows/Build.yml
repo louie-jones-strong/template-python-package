@@ -83,7 +83,7 @@ jobs:
         python -m pytest
 
 
-  Update-Badges:
+  Update-Documentation:
     needs: Unit-Tests
     runs-on: ubuntu-latest
     steps:
@@ -115,32 +115,11 @@ jobs:
           genbadge coverage --input-file=reports/coverage.xml --output-file=media/badges/coverage.svg
           genbadge tests --input-file=reports/junit.xml --output-file=media/badges/tests.svg
 
-      - name: Commit Badges
+      # - name: Update Documentation
+        # run: |
+
+      - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Auto Updating Badges
-
-  # Update-Docs:
-  #   needs: Unit-Tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name : Checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Setup Python $DEFAULT_PYTHON_VERSION
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
-  #         cache: 'pip' # caching pip dependencies
-
-  #     - name: Install dependencies
-  #       run: |
-  #         python -m pip install -r requirements.txt
-  #         python -m pip install -r requirements-dev.txt
-
-  #     - name: Commit Updated Docs
-  #       uses: stefanzweifel/git-auto-commit-action@v5
-  #       with:
-  #         commit_message: Auto Updating Documentation
-
+          commit_message: "[BOT COMMIT] Updating Docs and Badges"
 
