@@ -5,7 +5,7 @@ sphinx-autodoc-typehints==1.23.0
 
 # dev tests
 mypy==1.2.0
-flake8==6.0.0
+flake8==7.0.0
 pytest
 converage
 genbadge[all]
