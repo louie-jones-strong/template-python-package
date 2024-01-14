@@ -7,5 +7,5 @@ sphinx-autodoc-typehints
 mypy
 flake8
 pytest
-converage
+coverage
 genbadge[all]

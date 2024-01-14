@@ -1,0 +1,146 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Tests
+
+env:
+  DEFAULT_PYTHON_VERSION: 3.9
+
+
+on:
+  push:
+  workflow_dispatch:
+
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  Static-Analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - name : Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Python $DEFAULT_PYTHON_VERSION
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
+        cache: 'pip' # caching pip dependencies
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+        python -m pip install -r requirements-dev.txt
+
+    - name: Typecheck Source with mypy
+      run: |
+        python -m mypy src/ --config-file config.ini
+
+    - name: Lint Source with flake8
+      run: |
+        python -m flake8 src --config=config.ini
+
+    - name: Lint Tests with flake8
+      run: |
+        python -m flake8 tests --config=config.ini
+
+
+
+
+  Unit-Tests:
+    needs: Static-Analysis
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name : Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip' # caching pip dependencies
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+        python -m pip install -r requirements-dev.txt
+
+    - name: Run unit tests
+      run: |
+        python -m pytest
+
+
+  Update-Badges:
+    needs: Unit-Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name : Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python $DEFAULT_PYTHON_VERSION
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
+          cache: 'pip' # caching pip dependencies
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run-Tests
+        run: |
+          coverage run --data-file=reports/.converage -m pytest --junitxml=reports/junit.xml
+
+      - name: Create Coverage Reports
+        run: |
+          coverage report --data-file=reports/.converage
+          coverage xml -o reports/coverage.xml --data-file=reports/.converage
+
+      - name: Create Badges
+        run: |
+          genbadge coverage --input-file=reports/coverage.xml --output-file=media/badges/coverage.svg
+          genbadge tests --input-file=reports/junit.xml --output-file=media/badges/tests.svg
+
+      - name: Commit Badges
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Auto Updating Badges
+
+  # Update-Docs:
+  #   needs: Unit-Tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name : Checkout
+  #       uses: actions/checkout@v3
+
+  #     - name: Setup Python $DEFAULT_PYTHON_VERSION
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
+  #         cache: 'pip' # caching pip dependencies
+
+  #     - name: Install dependencies
+  #       run: |
+  #         python -m pip install -r requirements.txt
+  #         python -m pip install -r requirements-dev.txt
+
+  #     - name: Commit Updated Docs
+  #       uses: stefanzweifel/git-auto-commit-action@v5
+  #       with:
+  #         commit_message: Auto Updating Documentation
+
+
