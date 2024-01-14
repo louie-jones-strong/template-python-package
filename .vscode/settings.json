@@ -1,0 +1,16 @@
+{
+	"python.testing.unittestArgs": [
+		"-v",
+		"-s",
+		"./Tests",
+		"-p",
+		"*Test*.py"
+	],
+	"python.testing.pytestEnabled": false,
+	"python.testing.unittestEnabled": true,
+	"files.exclude": {
+		"**/__pycache__": true,
+		"**/*.pyc": true,
+		".mypy_cache": true,
+	},
+}
