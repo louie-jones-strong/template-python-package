@@ -15,19 +15,19 @@ with open(os.path.join(DIR, "requirements-dev.txt"), "r") as f:
 
 setup(
     name="",
-    packages=find_packages(where="src"),
     version="0.0.0",
     description="",
-    long_description=longDescription,
-    long_description_content_type="text/markdown",
     author="",
     author_email="",
     url="",
-    install_requires=requirements,
-    tests_require=devRequirements,
     python_requires='',
     keywords=[],
     license="",
     classifiers=[
     ],
+    packages=find_packages(where="src"),
+    long_description=longDescription,
+    long_description_content_type="text/markdown",
+    install_requires=requirements,
+    tests_require=devRequirements,
 )

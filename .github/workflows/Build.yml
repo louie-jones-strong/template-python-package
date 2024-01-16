@@ -45,6 +45,9 @@ jobs:
     - name: Lint Tests with flake8
       run: |
         python -m flake8 tests --config=config.ini
+    - name: Run client tests
+      run: |
+        bash PackAndValidate.sh
 
 
 
@@ -115,7 +118,7 @@ jobs:
 
 
   Update-Documentation:
-    needs: Build-Package
+    needs: Unit-Tests
     runs-on: ubuntu-latest
     steps:
       - name : Checkout
