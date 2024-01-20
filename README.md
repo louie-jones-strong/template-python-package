@@ -1,5 +1,5 @@
 # template-python-package
-Template repository for storing, testing, linting, building and releasing a python package
+Template repository for storing, testing, linting, packaging and releasing a python package
 
 
 

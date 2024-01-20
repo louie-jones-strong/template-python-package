@@ -1,0 +1,31 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=61.0"]
+
+[project]
+name = "YOUR_PACKAGE_NAME_Louie"
+version = "0.0.1"
+description = ""
+authors = [
+#   {name = "YOUR_NAME", email = "YOUR_EMAIL@example.com"}
+]
+keywords = []
+# https://pypi.org/classifiers/
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+]
+
+readme = "README.md"
+# license = {file = "LICENSE"}
+
+
+[project.urls]
+# Homepage = ""
+# Documentation = ""
+# Repository = ""
+# Issues = ""
+# Changelog = ""

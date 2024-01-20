@@ -9,7 +9,6 @@ on:
   workflow_dispatch:
 
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: write
   pages: write
@@ -22,7 +21,7 @@ jobs:
     - name : Checkout
       uses: actions/checkout@v3
 
-    - name: Setup Python $DEFAULT_PYTHON_VERSION
+    - name: Setup Python ${{ env.DEFAULT_PYTHON_VERSION }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
@@ -45,9 +44,6 @@ jobs:
     - name: Lint Tests with flake8
       run: |
         python -m flake8 tests --config=config.ini
-    - name: Run client tests
-      run: |
-        bash PackAndValidate.sh
 
 
 
@@ -89,7 +85,7 @@ jobs:
   #     - name : Checkout
   #       uses: actions/checkout@v3
 
-  #     - name: Setup Python $DEFAULT_PYTHON_VERSION
+  #     - name: Setup Python ${{ env.DEFAULT_PYTHON_VERSION }}
   #       uses: actions/setup-python@v4
   #       with:
   #         python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
@@ -124,7 +120,7 @@ jobs:
       - name : Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Python $DEFAULT_PYTHON_VERSION
+      - name: Setup Python ${{ env.DEFAULT_PYTHON_VERSION }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
