@@ -7,4 +7,5 @@
 		".mypy_cache": true,
 		".pytest_cache": true,
 	},
+	"liveServer.settings.root": "docs/_build/html",
 }

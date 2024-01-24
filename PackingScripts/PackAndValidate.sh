@@ -1,4 +1,4 @@
-source BashUtils.sh
+source PackingScripts/BashUtils.sh
 
 Log "Setup virtual environment..."
 RunCommand false source SetupVenv.sh
@@ -13,8 +13,8 @@ RunCommand true python -m flake8 src --config=config.ini
 RunCommand true python -m flake8 Tests --config=config.ini
 
 # create package
-Log "Creating package..."
-RunCommand false py -m build -s -w
+RunCommand false source CreatePackage.sh
+
 
 # check the created package is valid
 Log "Checking package..."
