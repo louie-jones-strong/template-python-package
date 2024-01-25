@@ -1,5 +1,7 @@
 source PackingScripts/BashUtils.sh
 
+Log "Cleaning up badges folder..."
+RunCommand false rm -rf media/badges
 
 Log "Updating badges..."
 RunCommand false genbadge coverage --input-file=reports/coverage.xml --output-file=media/badges/coverage.svg
