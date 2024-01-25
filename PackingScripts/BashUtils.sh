@@ -1,7 +1,7 @@
 # create variables
 LogFile="reports/build.log"
 ExitCode=0
-IsFastFail=false
+IsFastFail=true
 
 # create directory for log file
 mkdir -p reports

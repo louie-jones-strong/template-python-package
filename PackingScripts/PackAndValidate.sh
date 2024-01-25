@@ -1,7 +1,7 @@
 source PackingScripts/BashUtils.sh
 
 Log "Setup virtual environment..."
-RunCommand false source SetupVenv.sh
+RunCommand false source PackingScripts/SetupVenv.sh
 
 # Type checking
 Log "Type checking..."
@@ -13,7 +13,8 @@ RunCommand true python -m flake8 src --config=config.ini
 RunCommand true python -m flake8 Tests --config=config.ini
 
 # create package
-RunCommand false source CreatePackage.sh
+Log "Creating package..."
+RunCommand false source PackingScripts/CreatePackage.sh
 
 
 # check the created package is valid
@@ -28,7 +29,9 @@ Log "Creating coverage report..."
 RunCommand false coverage xml -o reports/coverage.xml --data-file=reports/.coverage
 RunCommand false coverage html -d reports/coverage --data-file=reports/.coverage
 
-RunCommand true UpdateBadges.sh
+RunCommand true PackingScripts/UpdateBadges.sh
+
+RunCommand true PackingScripts/UpdateDocs.sh
 
 Log ""
 Log "Complete. See log file for more information: $LogFile"
