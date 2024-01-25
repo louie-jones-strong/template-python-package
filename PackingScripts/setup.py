@@ -1,8 +1,5 @@
 import GitHelper
 from setuptools import setup
-import re
-
-
 
 
 
@@ -27,6 +24,7 @@ def LoadRequirements(fileName):
         content = f.read()
 
     return [i for i in content.split("\n") if len(i)]
+
 
 
 

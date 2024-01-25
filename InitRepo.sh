@@ -1,17 +1,35 @@
 source PackingScripts/BashUtils.sh
 
 version="0.0.1"
-projectName="MyProject"
+packageDisplayName="MyProject"
+internalPackageName="MyProject"
+pyPiPackageName="MyProject"
 author="MyName"
+authorEmail="MyEmail"
 
 read -p "Version [$version]: " versionInput
-read -p "Project name [$projectName]: " projectNameInput
+read -p "Package Display Name [$packageDisplayName]: " packageDisplayNameInput
+read -p "Internal Package Name [$internalPackageName]: " internalPackageNameInput
+read -p "PyPi Package Name [$pyPiPackageName]: " pyPiPackageNameInput
+
 read -p "Author [$author]: " authorInput
+read -p "Author Email [$authorEmail]: " authorEmailInput
 
 Log "Setup virtual environment..."
 # RunCommand true source PackingScripts/SetupVenv.sh
 
-RunCommand true sphinx-quickstart --quiet --no-sep --ext-autodoc --ext-todo --ext-coverage --ext-viewcode --ext-githubpages --templatedir=docs/DocTemplates -p "$projectName" -a "$author" -v "$version" docs
+# create project
+Log "Create project..."
+RunCommand true mkdir -p "src/$internalPackageName"
+RunCommand true touch "src/$internalPackageName/py.typed"
 
+RunCommand true touch "src/$internalPackageName/__init__.py"
+echo "__version__ = \"$version\"" >> "src/$internalPackageName/__init__.py"
+
+
+
+# create documentation
+Log "Create documentation..."
+RunCommand true sphinx-quickstart --quiet --no-sep --templatedir=docs/DocTemplates -p "$packageDisplayName" -a "$author" -v "$version" docs
 RunCommand true PackingScripts/UpdateDocs.sh
 

@@ -27,11 +27,14 @@ version = {{ version | repr }}
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = [{% if extensions %}
-{%- for ext in extensions %}
-    '{{ ext }}',
-{%- endfor %}
-{% endif %}]
+
+extensions = [
+    'sphinx.ext.todo',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autodoc',
+    'sphinx_autodoc_typehints'
+]
+
 
 templates_path = ['{{ dot }}templates']
 exclude_patterns = [{{ exclude_patterns }}]
@@ -51,8 +54,9 @@ language = {{ language | repr }}
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['{{ dot }}static']
+
 {% if 'sphinx.ext.intersphinx' in extensions %}
 # -- Options for intersphinx extension ---------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html#configuration
