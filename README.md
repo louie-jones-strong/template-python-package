@@ -47,6 +47,7 @@ Template repository for storing, testing, linting, packaging and releasing a pyt
 <!-- badges -->
 ![Tests](./media/badges/tests.svg)
 ![Coverage](./media/badges/coverage.svg)
+![Version](./media/badges/Version.svg)
 
 <!-- brief description -->
 *Brief description of your package*

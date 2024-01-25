@@ -20,16 +20,17 @@ Log "Setup virtual environment..."
 
 # create project
 Log "Create project..."
-RunCommand true mkdir -p "src/$internalPackageName"
-RunCommand true touch "src/$internalPackageName/py.typed"
+RunCommand false mkdir -p "src/$internalPackageName"
+RunCommand false touch "src/$internalPackageName/py.typed"
 
-RunCommand true touch "src/$internalPackageName/__init__.py"
+RunCommand false touch "src/$internalPackageName/__init__.py"
 echo "__version__ = \"$version\"" >> "src/$internalPackageName/__init__.py"
 
 
 
 # create documentation
 Log "Create documentation..."
-RunCommand true sphinx-quickstart --quiet --no-sep --templatedir=docs/DocTemplates -p "$packageDisplayName" -a "$author" -v "$version" docs
+RunCommand false sphinx-quickstart --quiet --no-sep --templatedir=docs/DocTemplates -p "$packageDisplayName" -a "$author" -v "$version" docs
 RunCommand true PackingScripts/UpdateDocs.sh
 
+RunCommand true PackingScripts/UpdateBadges.sh

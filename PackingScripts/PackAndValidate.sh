@@ -28,10 +28,7 @@ Log "Creating coverage report..."
 RunCommand false coverage xml -o reports/coverage.xml --data-file=reports/.coverage
 RunCommand false coverage html -d reports/coverage --data-file=reports/.coverage
 
-Log "Updating badges..."
-RunCommand false genbadge coverage --input-file=reports/coverage.xml --output-file=media/badges/coverage.svg
-RunCommand false genbadge tests --input-file=reports/junit.xml --output-file=media/badges/tests.svg
-
+RunCommand true UpdateBadges.sh
 
 Log ""
 Log "Complete. See log file for more information: $LogFile"

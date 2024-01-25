@@ -3,6 +3,8 @@ LogFile="reports/build.log"
 ExitCode=0
 IsFastFail=false
 
+# create directory for log file
+mkdir -p reports
 # clear log file
 echo "" > $LogFile
 
