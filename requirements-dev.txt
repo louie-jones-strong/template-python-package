@@ -9,6 +9,7 @@ flake8
 pytest
 coverage
 genbadge[all]
+pybadges
 
 # packaging
 twine

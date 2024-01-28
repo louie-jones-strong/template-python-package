@@ -4,6 +4,10 @@ Template repository for storing, testing, linting, packaging and releasing a pyt
 
 
 ## Setup CheckList
+```bash
+bash InitRepo.sh
+```
+
 - [ ] Pick a name for your package
 - [ ] Add Project License
   - [ ] Add License to [LICENSE](./LICENSE)
@@ -11,7 +15,6 @@ Template repository for storing, testing, linting, packaging and releasing a pyt
 - [ ] Update [pyproject.toml](./pyproject.toml)
   - [ ] Authors name and email
   - [ ] Package name
-  - [ ] Package version
   - [ ] Package short description
   - [ ] keywords
   - [ ] Project Urls

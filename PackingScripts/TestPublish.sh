@@ -1,7 +1,7 @@
 source PackingScripts/BashUtils.sh
 
 Log "Setup virtual environment..."
-# RunCommand true source PackingScripts/SetupVenv.sh
+RunCommand true source PackingScripts/SetupVenv.sh
 
 
 Log "Checking package..."
