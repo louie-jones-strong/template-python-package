@@ -8,7 +8,7 @@ RunCommand false rm -rf src/*.egg-info
 
 
 Log "Creating package..."
-RunCommand true py -m build -s -w
+RunCommand true py -m build -s -w --no-isolation
 
 
 Log "Cleaning up build folders Post Build..."

@@ -14,14 +14,34 @@ sys.path.insert(0, {{ module_path | repr }})
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import os, re
+from setuptools import find_packages
+
+def GetPackageName():
+    packagesPath = os.path.join("..", "src")
+    packages = find_packages(where=packagesPath)
+    print(packages)
+    return packages[0]
+
+def GetVersion(packageName):
+    packagePath = os.path.join("..", "src", packageName, "__init__.py")
+
+    with open(packagePath, "r") as f:
+        content = f.read()
+
+    versionRegex = re.compile(r"__version__ = \"(.*)\"")
+    version = versionRegex.search(content).group(1)
+
+
+    return version
+
+
+
 project = {{ project | repr }}
 copyright = {{ copyright | repr }}
 author = {{ author | repr }}
 
-{%- if version %}
-
-version = {{ version | repr }}
-{%- endif %}
+version = GetVersion(GetPackageName())
 
 
 # -- General configuration ---------------------------------------------------
