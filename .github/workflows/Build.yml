@@ -35,7 +35,7 @@ jobs:
 
     - name: Typecheck Source with mypy
       run: |
-        python -m mypy src --config-file config.ini
+        python -m mypy src/ --config-file config.ini
 
     - name: Lint Source with flake8
       run: |
